@@ -4,9 +4,11 @@
 //
 //  Created by 송영민 on 11/14/25.
 //
-
 import SwiftUI
 import SwiftData
+import ComposableArchitecture
+
+
 
 @main
 struct PdfTestApp: App {
@@ -14,8 +16,12 @@ struct PdfTestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootTabView()
-                .environmentObject(chatStore)
+            CounterView(store: Store(initialState: CounterFeature.State(), reducer: {
+                CounterFeature()
+            }))
+            
+//            RootTabView()
+//                .environmentObject(chatStore)
         }
         .modelContainer(for: [SummaryPDF.self, ChatMessageEntity.self])  // ✅ 여기
     }

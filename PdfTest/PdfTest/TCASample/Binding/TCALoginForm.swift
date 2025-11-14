@@ -14,8 +14,8 @@ struct TCALoginForm {
     // MARK: state
     @ObservableState
     struct State: Equatable {
-        @BindingState var email: String = ""
-        @BindingState var password: String = ""
+        var email: String = ""
+        var password: String = ""
         var isLoading: Bool = false
         var isFormValid: Bool = false
     }
@@ -24,6 +24,7 @@ struct TCALoginForm {
     // MARK: action
     enum Action: BindableAction {
         case binding(BindingAction<State>) // email, password 상태 바인딩
+        case validate
         case submit
     }
     
@@ -34,6 +35,13 @@ struct TCALoginForm {
             switch action {
             case .binding:
                 return .none // email, password 변경은 BindingReducer가 이미 처리
+            case .validate:
+                // 이메일은 '@' 포함, 비밀번호는 6자 이상으로 검증
+                let isEmailValid = state.email.contains("@")
+                let isPasswordValid = state.password.count >= 6
+
+                state.isFormValid = isEmailValid && isPasswordValid
+                return .none
             case .submit:
                 print("email: \(state.email), password: \(state.password) 제출 완료")
                 return .none

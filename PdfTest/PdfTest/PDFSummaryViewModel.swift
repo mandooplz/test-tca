@@ -202,7 +202,7 @@ final class PDFSummaryViewModel: ObservableObject {
 
                             while true {
                                 let prompt = "다음 내용을 한국어로 2~3줄로 요약:\n\(chunkText)"
-                                let urlLen = alanClient.urlLength(for: prompt)
+                                let urlLen = await alanClient.urlLength(for: prompt)
 
                                 print(">>> chunk", index + 1,
                                       "chars =", chunkText.count,

@@ -7,6 +7,8 @@
 import SwiftUI
 import ComposableArchitecture
 
+
+// Path를 따로 분리해야 하지 않을까? -> View와 관련된 데이터, 비즈니스 로직은 아님.
 // MARK: - Child Feature
 @Reducer
 struct MinwooAppFeature: Reducer {

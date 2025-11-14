@@ -2,6 +2,10 @@
 
 TCA(The-Composable-Architecture) 연습을 위한 테스트 iOS App 프로젝트입니다.
 
+## 프로젝트 구조
+
+TCA 관련 예시 코드와 SwiftUI View 파일은 `PdfTest/PdfTest/TCASample` 디렉터리에서 확인할 수 있습니다.
+
 ## 기본 개념
 
 - **State**: 화면에 필요한 데이터를 표현하는 구조체입니다.

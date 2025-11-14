@@ -1,0 +1,43 @@
+//
+//  PDFDocumentPicker.swift
+//  PdfTest
+//
+//  Created by 송영민 on 11/14/25.
+//
+
+import SwiftUI
+import UniformTypeIdentifiers
+
+struct PDFDocumentPicker: UIViewControllerRepresentable {
+    typealias UIViewControllerType = UIDocumentPickerViewController
+    
+    var onPick: (URL) -> Void
+    
+    func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
+        let types = [UTType.pdf]
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: types)
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onPick: onPick)
+    }
+    
+    final class Coordinator: NSObject, UIDocumentPickerDelegate {
+        let onPick: (URL) -> Void
+        
+        init(onPick: @escaping (URL) -> Void) {
+            self.onPick = onPick
+        }
+        
+        func documentPicker(_ controller: UIDocumentPickerViewController,
+                            didPickDocumentsAt urls: [URL]) {
+            guard let url = urls.first else { return }
+            onPick(url)
+        }
+    }
+}
+

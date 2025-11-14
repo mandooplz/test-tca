@@ -9,5 +9,3 @@ import ComposableArchitecture
 
 
 // MARK: Domain
-@MainActor
-struct MyPDF

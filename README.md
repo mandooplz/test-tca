@@ -61,6 +61,22 @@ struct CounterView: View {
 }
 ```
 
+## Navigation
+
+TCA에서 내비게이션은 push, pop을 호출하는 것이 아니라 State를 바꾸는 방식입니다.
+
+1. Tree-based navigation
+2. Stack-based navigation
+3. Dismissal
+
+## Dependencies
+
+## Sharding State
+
+## Concurrency
+
+## Bindings
+
 ## 참고
 
 - ![TCA Github Repo](https://github.com/pointfreeco/swift-composable-architecture)

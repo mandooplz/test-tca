@@ -10,4 +10,6 @@ import ComposableArchitecture
 
 // MARK: Domain
 @MainActor
-struct MyPDF
+struct MyPDF{
+
+}

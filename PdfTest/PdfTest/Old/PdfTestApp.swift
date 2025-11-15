@@ -17,21 +17,13 @@ struct PdfTestApp: App {
     var body: some Scene {
         WindowGroup {
             InventoryView(
-                // 생성,준비를 Store로 감싸서 InventoryView로 넘기지..?
-                // 결국 InventoryView는 state와 action을 조종하는 것을 받고 시작하는 화면?
-                            store: Store(
-                                // InventoryFeature 부모 화면의 초기 상태 생성
-                                initialState: InventoryFeature.State()
-                            ) {
-                                // 부모의 Reducer 준비
-                                InventoryFeature()
-                            }
-                        )
-            
-//            RootTabView()
-//                .environmentObject(chatStore)
+                store: Store(
+                    initialState: InventoryFeature.State()
+                ) {
+                    InventoryFeature()
+                }
+            )
         }
-//        .modelContainer(for: [SummaryPDF.self, ChatMessageEntity.self])  // ✅ 여기
     }
 }
 

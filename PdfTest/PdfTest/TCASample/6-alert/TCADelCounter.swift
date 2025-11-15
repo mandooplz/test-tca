@@ -11,8 +11,7 @@ import ComposableArchitecture
 // MARK: Object
 @Reducer
 struct TCADelCounter {
-
-    // MARK: - State
+    // MARK: State
     @ObservableState
     struct State: Equatable {
         var count = 0
@@ -21,7 +20,7 @@ struct TCADelCounter {
         @Presents var alert: AlertState<Action.Alert>?
     }
 
-    // MARK: - Action
+    // MARK: Action
     enum Action: Equatable {
         case incrementButtonTapped
         case deleteButtonTapped
@@ -35,7 +34,6 @@ struct TCADelCounter {
         }
     }
 
-    // MARK: - Reducer Body
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {

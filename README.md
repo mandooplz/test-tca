@@ -81,6 +81,74 @@ TCA에서 내비게이션은 push, pop을 호출하는 것이 아니라 State를
 
 ## Bindings
 
+## Scope
+
+`Scope`를 사용하면 부모 Feature 안에서 자식 상태와 액션을 한 번에 관리할 수 있습니다.
+
+```swift
+@Reducer
+struct TCATodoBoard {
+    struct State: Equatable {
+        var todo = TCATodo.State()
+        var counter = TCATodoCounter.State()
+    }
+    enum Action: Equatable {
+        case todo(TCATodo.Action)
+        case counter(TCATodoCounter.Action)
+    }
+
+    var body: some Reducer<State, Action> {
+        Scope(state: \.todo, action: \.todo) { TCATodo() }
+        Scope(state: \.counter, action: \.counter) { TCATodoCounter() }
+
+        Reduce { state, action in
+            switch action {
+            case .todo(.toggleImportant):
+                state.statusMessage = "Todo 토글"
+                return .none
+            case .counter(.delegate(.reachedTen)):
+                state.statusMessage = "카운터 10회"
+                return .none
+            default:
+                return .none
+            }
+        }
+    }
+}
+```
+
+### Delegate Action
+
+자식에서 부모로 콜백을 보낼 땐 `Delegate` 액션을 두고 `.send`를 반환합니다.
+
+```swift
+@Reducer
+struct TCATodoCounter {
+    enum Action: Equatable {
+        case increment
+        case delegate(Delegate)
+        enum Delegate: Equatable { case reachedTen }
+    }
+
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case .increment:
+                state.count += 1
+                return state.count == 10 ? .send(.delegate(.reachedTen)) : .none
+            case .delegate:
+                return .none
+            }
+        }
+    }
+}
+
+// 부모 Reducer
+case .counter(.delegate(.reachedTen)):
+    state.statusMessage = "카운터 완료"
+    return .none
+```
+
 ## 참고
 
 - ![TCA Github Repo](https://github.com/pointfreeco/swift-composable-architecture)

@@ -81,6 +81,8 @@ TCA에서 내비게이션은 push, pop을 호출하는 것이 아니라 State를
 
 ## Bindings
 
+## Scope
+
 ## 참고
 
 - ![TCA Github Repo](https://github.com/pointfreeco/swift-composable-architecture)

@@ -1,154 +1,20 @@
 # test-tca
 
-TCA(The-Composable-Architecture) 연습을 위한 테스트 iOS App 프로젝트입니다.
+TCA(The Composable Architecture)를 연습하기 위한 SwiftUI iOS 프로젝트입니다. 모든 예시는 `PdfTest/PdfTest/TCASample` 경로 아래에 정리되어 있으며, 각 폴더별 README에서 사용한 문법과 기능을 설명합니다.
 
 ## 프로젝트 구조
 
-TCA 관련 예시 코드와 SwiftUI View 파일은 `PdfTest/PdfTest/TCASample` 디렉터리에서 확인할 수 있습니다.
+- `PdfTest.xcodeproj` — 샘플 앱을 빌드하는 Xcode 프로젝트
+- `PdfTest/PdfTest/TCASample` — TCA 개념별 실습 코드 모음
 
-## 기본 개념
+## 샘플별 README
 
-- **State**: 화면에 필요한 데이터를 표현하는 구조체입니다.
-- **Action**: 사용자 입력이나 비동기 응답 등 상태를 변경시키는 모든 이벤트입니다.
-- **Reducer**: `State`와 `Action`을 받아 새로운 상태를 리턴하는 순수 함수입니다.
-- **Store**: `State`를 보관하고 `Reducer`를 실행해 액션을 처리하는 중앙 허브이며 View에서 관찰합니다.
-- **View**: `Store`를 주입받아 상태를 표시하고 액션을 전송합니다.
+- [1-object · 기본 카운터](PdfTest/PdfTest/TCASample/1-object/README.md)
+- [2-binding · 바인딩 기반 로그인 폼](PdfTest/PdfTest/TCASample/2-binding/README.md)
+- [3-stack-nav · NavigationStack 상태 관리](PdfTest/PdfTest/TCASample/3-stack-nav/README.md)
+- [4-tree-nav · 모달/시트 트리 구성](PdfTest/PdfTest/TCASample/4-tree-nav/README.md)
+- [5-scope · 부모/자식 Scope 묶기](PdfTest/PdfTest/TCASample/5-scope/README.md)
+- [6-alert · AlertState 제어](PdfTest/PdfTest/TCASample/6-alert/README.md)
+- [7-tabbar · 탭 상태 모델링](PdfTest/PdfTest/TCASample/7-tabbar/README.md)
 
-## 간단한 예제
-
-```swift
-import ComposableArchitecture
-import SwiftUI
-
-
-// MARK: Object
-@Reducer
-struct CounterFeature {
-    // MARK: state
-    @ObservableState
-    struct State: Equatable {
-        var count = 0
-    }
-
-
-    // MARK: action
-    enum Action {
-        case increment
-        case decrement
-    }
-    var body: some Reducer<State, Action> {
-        Reduce { state, action in
-            switch action {
-            case .increment:
-                state.count += 1
-                return .none
-            case .decrement:
-                state.count -= 1
-                return .none
-            }
-        }
-    }
-}
-
-struct CounterView: View {
-    let store: StoreOf<CounterFeature>
-
-    var body: some View {
-        VStack {
-            Text("\(store.count)")
-            HStack {
-                Button("-") { store.send(.decrement) }
-                Button("+") { store.send(.increment) }
-            }
-        }.font(.largeTitle)
-    }
-}
-```
-
-## Navigation
-
-TCA에서 내비게이션은 push, pop을 호출하는 것이 아니라 State를 바꾸는 방식입니다.
-
-1. Tree-based navigation
-2. Stack-based navigation
-3. Dismissal
-
-## Dependencies
-
-## Sharding State
-
-## Concurrency
-
-## Bindings
-
-## Scope
-
-`Scope`를 사용하면 부모 Feature 안에서 자식 상태와 액션을 한 번에 관리할 수 있습니다.
-
-```swift
-@Reducer
-struct TCATodoBoard {
-    struct State: Equatable {
-        var todo = TCATodo.State()
-        var counter = TCATodoCounter.State()
-    }
-    enum Action: Equatable {
-        case todo(TCATodo.Action)
-        case counter(TCATodoCounter.Action)
-    }
-
-    var body: some Reducer<State, Action> {
-        Scope(state: \.todo, action: \.todo) { TCATodo() }
-        Scope(state: \.counter, action: \.counter) { TCATodoCounter() }
-
-        Reduce { state, action in
-            switch action {
-            case .todo(.toggleImportant):
-                state.statusMessage = "Todo 토글"
-                return .none
-            case .counter(.delegate(.reachedTen)):
-                state.statusMessage = "카운터 10회"
-                return .none
-            default:
-                return .none
-            }
-        }
-    }
-}
-```
-
-### Delegate Action
-
-자식에서 부모로 콜백을 보낼 땐 `Delegate` 액션을 두고 `.send`를 반환합니다.
-
-```swift
-@Reducer
-struct TCATodoCounter {
-    enum Action: Equatable {
-        case increment
-        case delegate(Delegate)
-        enum Delegate: Equatable { case reachedTen }
-    }
-
-    var body: some Reducer<State, Action> {
-        Reduce { state, action in
-            switch action {
-            case .increment:
-                state.count += 1
-                return state.count == 10 ? .send(.delegate(.reachedTen)) : .none
-            case .delegate:
-                return .none
-            }
-        }
-    }
-}
-
-// 부모 Reducer
-case .counter(.delegate(.reachedTen)):
-    state.statusMessage = "카운터 완료"
-    return .none
-```
-
-## 참고
-
-- ![TCA Github Repo](https://github.com/pointfreeco/swift-composable-architecture)
+각 링크를 참고해 원하는 샘플의 구현 포인트와 TCA 문법을 빠르게 확인할 수 있습니다.

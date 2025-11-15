@@ -24,6 +24,6 @@ struct TCATabhome {
     
     
     enum Action: Equatable {
-        case selectTab(Tab) // 사용자가 선택한 
+        case selectTab(Tab) // 사용자가 선택한
     }
 }

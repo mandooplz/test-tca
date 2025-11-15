@@ -9,12 +9,12 @@ TCA(The Composable Architecture)를 연습하기 위한 SwiftUI iOS 프로젝트
 
 ## 샘플별 README
 
-- [1-object · 기본 카운터](PdfTest/PdfTest/TCASample/1-object/README.md)
-- [2-binding · 바인딩 기반 로그인 폼](PdfTest/PdfTest/TCASample/2-binding/README.md)
-- [3-stack-nav · NavigationStack 상태 관리](PdfTest/PdfTest/TCASample/3-stack-nav/README.md)
-- [4-tree-nav · 모달/시트 트리 구성](PdfTest/PdfTest/TCASample/4-tree-nav/README.md)
-- [5-scope · 부모/자식 Scope 묶기](PdfTest/PdfTest/TCASample/5-scope/README.md)
-- [6-alert · AlertState 제어](PdfTest/PdfTest/TCASample/6-alert/README.md)
-- [7-tabbar · 탭 상태 모델링](PdfTest/PdfTest/TCASample/7-tabbar/README.md)
+- [1-object · 기본 카운터](docs/1-object.md)
+- [2-binding · 바인딩 기반 로그인 폼](docs/2-binding.md)
+- [3-stack-nav · NavigationStack 상태 관리](docs/3-stack-nav.md)
+- [4-tree-nav · 모달/시트 트리 구성](docs/4-tree-nav.md)
+- [5-scope · 부모/자식 Scope 묶기](docs/5-scope.md)
+- [6-alert · AlertState 제어](docs/6-alert.md)
+- [7-tabbar · 탭 상태 모델링](docs/7-tabbar.md)
 
 각 링크를 참고해 원하는 샘플의 구현 포인트와 TCA 문법을 빠르게 확인할 수 있습니다.

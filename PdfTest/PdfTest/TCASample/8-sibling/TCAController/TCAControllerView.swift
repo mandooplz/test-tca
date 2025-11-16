@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 // MARK: View
 struct TCAControllerView: View {
-    @Bindable var store: StoreOf<TCAController>
+    let store: StoreOf<TCAController>
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {

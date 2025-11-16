@@ -10,8 +10,10 @@ import ComposableArchitecture
 
 // MARK: View
 struct TCAMainCView: View {
-    @Bindable var store: StoreOf<TCAMainC>
+    // MARK: model
+    @State var store: StoreOf<TCAMainC>
 
+    // MARK: body
     var body: some View {
         NavigationStack {
             ScrollView {

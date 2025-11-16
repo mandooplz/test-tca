@@ -13,14 +13,15 @@ import ComposableArchitecture
 struct SettingTab {
     @ObservableState
     struct State: Equatable {
-        // Setting 화면에 필요한 상태
+        
     }
     enum Action {
         // Setting 화면에서 발생하는 액션
+        case increment
+        case decrement
     }
     var body: some Reducer<State, Action> {
         Reduce { state, action in
-            // Setting 로직
             return .none
         }
     }

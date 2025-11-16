@@ -54,9 +54,16 @@ struct TCATabhome {
                 state.destination = .settings(.init())
                 return .none
                 
-                // 자식 리듀서 액션
+                // 자식에서
+            case .destination(.presented(.settings(.increment))):
+                state.count += 1
+                return .none
+                
+            case .destination(.presented(.settings(.decrement))):
+                state.count -= 1
+                return .none
+                
             case .destination:
-                print("destination의 액션이 실행되었습니다.")
                 return .none
                 
                 // 상태 변경

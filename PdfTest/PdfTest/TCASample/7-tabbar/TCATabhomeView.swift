@@ -59,7 +59,7 @@ struct TCATabhomeView: View {
             
             // SettingTab Presentation
             .sheet(item: $store.scope(state: \.destination?.settings, action: \.destination.settings)) { store in
-                Text("SettingTab과 연결된 View입니다.")
+                SettingTabView(store: store)
             }
         }
     }
